@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>SpotiMaps</title>
+    <!-- Meta tags Requeridos -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Plantilla -->
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/specimen/Kumbh+Sans -->
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">  <!-- https://fontawesome.com/-->  
+    <link rel="stylesheet" href="css/magnific-popup.css">       <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
+    <link rel="stylesheet" href="css/tooplate-vertex.css">
+    <!-- Mapa -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <style>
+        #my-map {
+            width: 100%;
+            height: 100%;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+</head>
+
+<body onload="obtenerToken()">
+    
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+
+    
+    <div id="mapa" class="main">
+        <div class="controls">
+            <img id="wheel" src="img/LOGO.png" width="100%" height="30%">
+            <div class="results">
+                <label for="name">Nombre:</label>
+                <input id="name" type="text" readonly />
+                <label for="house-number">Numero de casa:</label>
+                <input id="house-number" type="text" readonly />
+                <label for="street">Calle:</label>
+                <input id="street" type="text" readonly />
+                <label for="postcode">Codigo postal:</label>
+                <input id="postcode" type="text" readonly />
+                <label for="city">Ciudad:</label>
+                <input id="city" type="text" readonly />
+                <label for="state">Estado o comunidad:</label>
+                <input id="state" type="text" readonly />
+                <label for="country">País:</label>
+                <input id="country" type="text" readonly />
+                <label for="latlng">Latlng:</label>
+                <input id="latlng" type="text" readonly />
+                <span id="status">Selecciona el país de destino</span>
+
+            </div>
+        </div>
+        <div id="my-map"></div>
+    </div>
+    <div id="services" class="tm-section">
+        <!-- Services left -->
+        <div class="tm-section-col tm-content">
+            <h2 class="tm-text-primary">Our Services</h2> 
+            <p>
+                Nuesto <strong>objetivo principal</strong> es que nuestros usuarios puedan buscar conciertos y saber un poco acerca de su musica para saber si es de su gusto o no. 
+            </p>       
+            <hr class="tm-hr tm-ml tm-sm-mt-30">
+            <div class="tm-row">
+                <div class="tm-col">
+                    <div class="tm-text-center tm-my-50">
+                        <i class="fas fa-street-view fa-3x"></i>
+                    </div>                        
+                    <p>
+                        Busqueda en el lugar indicado de los diferentes conciertos que se encuentran en dicho país.
+                    </p>
+                </div>
+                <div class="tm-col">
+                    <div class="tm-text-center tm-my-50">
+                        <i class="fas fa-bullseye fa-3x"></i>
+                    </div>                        
+                    <p>
+                        Obtención de los enlaces para la compra de entradas de cada concierto con sus respectivas Playlists.
+                    </p>
+                </div>
+            </div>                
+        </div>
+        <img class="image" id="wheel" src="img/hombre.jpg" width="20%" height="20%">
+    </div> <!-- #services -->
+    <div id="gallery" class="tm-content tm-content-small-top">
+        <div class="tm-gallery-container">
+            <h2 class="tm-text-primary tm-text-right tm-gallery-header">Our Gallery</h2> 
+            <div class="tm-gallery tm-mb-80">
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-01.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 1</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-01.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-02.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 2</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-02.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-03.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 3</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-03.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-04.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 4</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-04.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-05.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 5</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-05.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-06.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 6</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-06.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-07.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 7</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-07.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-08.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 8</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-08.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-09.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 9</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-09.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-10.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 10</h2>
+                        <p>Ampliar</p>
+                        <a href="img/gallery/img-10.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-11.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Picture 11</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-11.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-12.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Item 12</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-12.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-13.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 13</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-13.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-14.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Picture 14</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-14.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-15.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 15</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-15.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-16.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 16</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-16.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-17.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 17</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-17.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-18.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 18</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-18.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-19.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 19</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-19.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-20.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 20</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-20.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-21.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 21</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-21.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-22.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 22</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-22.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-23.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Pic 23</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-23.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-24.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 24</h2>
+                        <p>Web Design 2021</p>
+                        <a href="img/gallery/img-24.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-25.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 25</h2>
+                        <p>Website Design</p>
+                        <a href="img/gallery/img-25.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-05.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 26</h2>
+                        <p>HTML CSS Layout</p>
+                        <a href="img/gallery/img-05.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-04.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 27</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-04.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-03.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 28</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-03.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-02.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Number 29</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-02.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+                <figure class="effect-goliath tm-gallery-item">
+                    <img src="img/gallery/tn/img-01.jpg" alt="Image"/>
+                    <figcaption>
+                        <h2>Numero 30</h2>
+                        <p>Aliquam lacinia</p>
+                        <a href="img/gallery/img-01.jpg">View more</a>
+                    </figcaption>			
+                </figure>
+            </div>
+            <div class="tm-paging tm-mb-130"></div>
+        </div>
+    </div>
+
+    <div id="about" class="tm-section">
+        <!-- About left -->
+        <div class="tm-section-col tm-content tm-content-small">
+            <h2 class="tm-text-primary">About Us</h2>
+            <p>
+                Los creadores de esta pagina somos:
+            </p>
+            <p>
+                Alberto García Aparicio
+            </p>
+            <p>
+                Sandra Ciudad Moreno
+            </p>
+            <p>
+                Néstor López Torres
+            </p>
+            <hr class="tm-hr tm-mb-50">                
+            <p class="tm-mb-50">
+                Las Api utilizadas para el desarrollo de esta pagina son: Geoapify, TicketMaster y Spotify.
+            </p>
+               
+        </div>
+        <img class="image" id="wheel" src="img/APIS.jpg" width="30%" height="30%">
+   </div> <!-- #about -->
+
+    <div id="contact" class="tm-section">
+        <!-- Contact left -->
+        <div class="tm-section-col tm-content tm-content-small">
+            <h2 class="tm-text-primary">Contact Us</h2>
+            <p>
+                Si usted tiene alguna duda y quiere contactar con nosotros rellene el siguiente formulario y le llegara su respuesta entre 1-2 dias laborales.
+            </p> 
+            <form id="contact-form" action="" method="POST" class="tm-contact-form tm-mb-200">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <textarea rows="6" name="message" class="form-control rounded-0" placeholder="Message" required=></textarea>
+                </div>
+
+                <div class="form-group tm-text-right">
+                    <button type="submit" disabled class="tm-btn">Send</button>
+                </div>
+            </form>
+            <footer class="tm-copyright tm-text-small">
+                Grupo SpotiMaps
+                
+                - UCLM <a rel="nofollow" href="https://esi.uclm.es" class="tm-text-link" target="_parent">ESI</a>
+            </footer>              
+        </div>
+        <img class="image" id="wheel" src="img/EsiUclm.png" width="30%" height="30%">
+
+    </section>
+
+    <!--Leaflet 1.7.1, libreria JS para mapas interactivos-->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="">
+    </script>
+
+    <script src="js/app.js"></script>
+    <script src="js/plugins.js"></script>
+    <script>
+        $(window).on("load", function() {
+            $('body').addClass('loaded');
+        });
+
+        $(function(){
+            
+            /*************** Navigation *****************/
+
+            const tmMainNav = $("#tm-main-nav");
+
+            tmMainNav.singlePageNav({
+                filter: ':not(.external)'
+            });
+
+            $('.navbar-toggler').click(function(e) {
+                e.stopPropagation();
+                tmMainNav.toggleClass('show');
+            });
+
+            $("html").click(function(e) {
+                $("#tm-main-nav").removeClass("show");
+            });
+
+            /****************** Smooth Scrolling *****************/
+
+            $(".tm-btn-next").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+                        // window.location.hash = hash;
+                    });
+                }
+            });
+
+            $('.tm-brand-icon').on('click', function(event) {
+                $('html, body').animate({
+                        scrollTop: $('#intro').offset().top
+                    }, 800);
+            });
+
+            /****************** Gallery ******************/
+
+            const galleryItems = document.querySelector(".tm-gallery").children;
+            const itemsPerPage = 10;
+            const totalPages = Math.ceil(galleryItems.length / itemsPerPage);
+            const pageAttribute = 'data-page';
+
+            function setPagination(currentPage) {
+                for(let i = 1; i <= totalPages; i++) {
+                    var $pager = '';
+                    
+                    if(currentPage == i) {
+                        $pager = $('<a href="javascript:void(0);" class="active tm-paging-link" '+pageAttribute+'="'+i+'"></a>');
+                    } else {
+                        $pager = $('<a href="javascript:void(0);" class="tm-paging-link" '+pageAttribute+'="'+i+'"></a>');
+                    }
+
+                    $pager.html(i);
+
+                    $pager.click(function(){ 
+                        $('.tm-paging-link').removeClass("active");
+                        $(this).addClass('active');
+                        var page = $(this).eq(0).attr(pageAttribute);
+                        showItems(page);
+                    });
+
+                    $pager.appendTo($('.tm-paging'));
+                }
+            }
+
+            function showItems(currentPage) {
+                for(let i = 0; i < galleryItems.length; i++) {
+                    galleryItems[i].classList.remove("show");
+                    galleryItems[i].classList.add("hide");
+
+                    if(i >= (currentPage * itemsPerPage) - itemsPerPage && i < currentPage * itemsPerPage) {
+                        galleryItems[i].classList.remove("hide");
+                        galleryItems[i].classList.add("show");
+                    }
+                }
+            }
+
+            setPagination(1);
+            showItems(1);
+
+            /****************** Magnific Popup ***********/
+
+            $('.tm-gallery').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        });
+    </script>
+    
+
+</body>
+
+</html>
